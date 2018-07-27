@@ -39,8 +39,9 @@ body {
   width: 100vw;
   height: 100vh;
   background: url("smoke.png");
-  -webkit-background-size: contain;
-  background-size: contain;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
   animation-name: smokeMoving;
   animation-duration: 10s;
   animation-timing-function: linear;
@@ -153,6 +154,7 @@ body {
 }
 .form__input:valid + .form__input:valid + .form__input:valid + .form__input:valid + .form__submit {
   opacity: 1;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
 }
 @keyframes smokeMoving {
   0% {
