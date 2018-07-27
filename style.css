@@ -54,17 +54,25 @@ body {
   animation-delay: 5s;
 }
 .form-blured-back {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
   z-index: 3;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.form-blured-back__back {
   width: 350px;
   height: 400px;
   border-radius: 20px;
   filter: blur(10px);
   background: url("wp.jpg") no-repeat;
   background-position: center;
-  transform: translate(-50%, -50%);
 }
 .form-box {
   z-index: 3;

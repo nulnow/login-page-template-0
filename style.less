@@ -75,20 +75,27 @@ body {
 }
 
 .form-blured-back {
+
+    .center-items();
+
     z-index: 3;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
 
-    width: 350px;
-    height: 400px;
+    width: 100vw;
+    height: 100vh;
 
-    border-radius: @formBorderRadius;
+    &__back {
+        width: 350px;
+        height: 400px;
 
-    filter: blur(10px);
-    background: url(@backgroundImage) no-repeat;
-    background-position: center;
-    transform: translate(-50%, -50%);
+        border-radius: @formBorderRadius;
+
+        filter: blur(10px);
+        background: url(@backgroundImage) no-repeat;
+        background-position: center;
+    }
 }
 
 .form-box {
