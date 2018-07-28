@@ -22,25 +22,27 @@
 <div class="smoke smoke--2"></div>
 
 <div class="form-box">
-    <form action="" method="post" class="form">
+    <form action="" method="post" class="form" id="form">
         
         <div class="form__header">
             <h1 class="form__title">Регистрация</h1>
         </div>
 
         <div class="form__body">
-            <input type="text" class="form__input" placeholder="Введите никнейм" required="true" autocomplete="false" />
+            <input type="text" class="form__input" id="nickname" placeholder="Введите никнейм"  autocomplete="false" />
 
-            <input type="email" class="form__input" placeholder="Введите email" required="true" autocomplete="false" />
+            <input type="email" class="form__input" id="email" placeholder="Введите email"  autocomplete="false" />
 
-            <input type="password" class="form__input" placeholder="Придумайте хороший пароль" required="true" autocomplete="false" />
+            <input type="password" class="form__input" id="password1" placeholder="Придумайте хороший пароль"  autocomplete="false" />
 
-            <input type="password" class="form__input" placeholder="Повторите пароль" required="true" autocomplete="false" />
+            <input type="password" class="form__input" id="password2" placeholder="Повторите пароль"  autocomplete="false" />
 
             <input type="submit" class="form__submit" value="Зарегистрироваться">
         </div>
 
     </form>
+
+<script src="main.js"></script>
 </div>
     
 </body>
