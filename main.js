@@ -1,79 +1,128 @@
 var form = document.getElementById("form");
+var nicknameInput = document.getElementById("nickname");
+var emailInput = document.getElementById("email");
+var password1Input = document.getElementById("password1");
+var password2Input = document.getElementById("password2");
 
-var nickname = document.getElementById("nickname");
-var email = document.getElementById("email");
-var password1 = document.getElementById("password1");
-var password2 = document.getElementById("password2");
+function trim(str) {
+    // Удаляет все пробелы в начале и в конце строки
+    return str.replace(/^\s*/,'').replace(/\s*$/,'');
+}
+
+function trimPoints(str) {
+    // Удаляет все точки в начале и в конце строки
+    return str.replace(/^[.]*/,'').replace(/[.]*$/,'');
+}
+
+function setValid(field) {
+    field.classList.add("form__input--valid");
+}
 
 function setInvalid(field) {
     field.classList.add("form__input--invalid");
 }
 
-function clearInvalid(field) {
+function clearValidInvalid(field) {
+    field.classList.remove("form__input--valid");
     field.classList.remove("form__input--invalid");
 }
 
+function checkAllEmpty() {
+    if (nicknameInput.value) return false;
+    if (emailInput.value) return false;
+    if (password1Input.value) return false;
+    if (password2Input.value) return false;
+    return true;
+}
+
+function clearAllInvalid() {
+    clearValidInvalid(nicknameInput);
+    clearValidInvalid(emailInput);
+    clearValidInvalid(password1Input);
+    clearValidInvalid(password2Input);
+}
+
 function validateNickname() {
-    nickname.value=nickname.value.replace(/^\s*/,'').replace(/\s*$/,'');
+    if (checkAllEmpty()) clearAllInvalid();
 
-    if (!nickname.value) {
-        setInvalid(nickname);
+    nicknameInput.value=trim(nicknameInput.value);
+    nicknameInput.value=trimPoints(nicknameInput.value);
+
+    if (!nicknameInput.value) {
+        setInvalid(nicknameInput);
         return false;
     }
 
-    if (!nickname.value.match(/^[a-z0-9_]*$/)) {
-        setInvalid(nickname);
+    if (!nicknameInput.value.match(/^[a-z0-9_]*$/)) {
+        setInvalid(nicknameInput);
         return false;
     }
 
-    clearInvalid(nickname);
+    clearValidInvalid(nicknameInput);
+    setValid(nicknameInput);
     return true;
 }
 
 function validateEmail() {
-    email.value=email.value.replace(/^\s*/,'').replace(/\s*$/,'');
-    email.value=email.value.replace(/^[.]*/,'').replace(/[.]*$/,'');
+    if (checkAllEmpty()) clearAllInvalid();
+    
+    emailInput.value=trim(emailInput.value);
+    emailInput.value=trimPoints(emailInput.value);
 
-    while(email.value.match(/[.][.]/)) email.value=email.value.replace(/[.][.]/,'.');
+    // Заменяет все места, где больше одной точки подряд на одну точку
+    while(emailInput.value.match(/[.][.]/)) {
+        emailInput.value=emailInput.value.replace(/[.][.]/,'.');
+    }
 
-    if (email.value.match(/^[.]/)) {
-        setInvalid(email);
+    // Если email начинается с точки
+    if (emailInput.value.match(/^[.]/)) {
+        setInvalid(emailInput);
         return false;
     }
 
-    if (email.value.match(/[.]$/)) {
-        setInvalid(email);
+    // Если email заканчивается точкой
+    if (emailInput.value.match(/[.]$/)) {
+        setInvalid(emailInput);
         return false;
     }
 
-    if (!email.value.match(/^[a-z0-9_.]*@[a-z0-9_.]*$/)) {
-        setInvalid(email);
+    if (!emailInput.value.match(/^[\w_.]+@[\w_.]+$/)) {
+        setInvalid(emailInput);
         return false;
     }
 
-    clearInvalid(email);
+    clearValidInvalid(emailInput);
+    setValid(emailInput);
     return true;
 }
 
 function validatePasswords() {
-    password1.value=password1.value.replace(/^\s*/,'').replace(/\s*$/,'');
-    password2.value=password2.value.replace(/^\s*/,'').replace(/\s*$/,'');
+    if (checkAllEmpty()) clearAllInvalid();
 
-    if (!password1.value || !password2.value) {
-        setInvalid(password1);
-        setInvalid(password2);
+    if (!password1Input.value.match(/^[\w!@#$%^&*()-_=+}]*$/)) {
+        setInvalid(password1Input);
+        setInvalid(password2Input);
         return false;
     }
 
-    if (password1.value !== password2.value) {
-        setInvalid(password1);
-        setInvalid(password2);
+    if (!password1Input.value || !password2Input.value) {
+        setInvalid(password1Input);
+        setInvalid(password2Input);
         return false;
     }
 
-    clearInvalid(password1);
-    clearInvalid(password2);
+    if (password1Input.value !== password2Input.value) {
+        setInvalid(password1Input);
+        setInvalid(password2Input);
+        return false;
+    }
 
+    clearValidInvalid(password1Input);
+    clearValidInvalid(password2Input);
+
+    setValid(password1Input);
+    setValid(password2Input);
+    if (checkAllEmpty()) clearAllInvalid();
     return true;
 }
 
@@ -87,10 +136,16 @@ function validateForm() {
     return validated;
 }
 
-nickname.onchange = validateNickname;
-email.onchange = validateEmail;
-password1.onchange = validatePasswords;
-password2.onchange = validatePasswords;
+nicknameInput.onchange = validateNickname;
+emailInput.onchange = validateEmail;
+password1Input.onchange = validatePasswords;
+password2Input.onchange = validatePasswords;
+
+[nicknameInput, emailInput, password1Input, password2Input].map(function(input) {
+    input.onblur = function() {
+        if (checkAllEmpty()) clearAllInvalid();
+    }
+});
 
 form.onsubmit = function(event) {
     event.preventDefault();

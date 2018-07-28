@@ -20,7 +20,8 @@
 @themeGradient: linear-gradient(@themeColor--lighter, @themeColor--darker);
 @themeGradient--dark: linear-gradient(@themeColor--darker, @themeColor--darkest);
 
-@backgroundImage: "wp.jpg";
+@smokeImageUrl: "smoke.png";
+@backgroundImageUrl: "wp.jpg";
 @formBorderRadius: 20px;
 @bodyFont: 'Roboto Slab', serif;
 
@@ -37,6 +38,8 @@
     padding: 0;
 
     box-sizing: border-box;
+
+    font-family: @bodyFont;
 }
 
 body {
@@ -56,7 +59,7 @@ body {
     width: 100vw;
     height: 100vh;
 
-    background: url(@backgroundImage) no-repeat;
+    background: url(@backgroundImageUrl) no-repeat;
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center;
@@ -72,7 +75,9 @@ body {
     width: 100vw;
     height: 100vh;
 
-    background: url("smoke.png");
+    filter: blur(2px);
+
+    background: url(@smokeImageUrl);
     -webkit-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
@@ -87,11 +92,11 @@ body {
     opacity: 0;
 
     &--1 {
-        
+
     }
 
     &--2 {
-        transform: rotate(360deg);
+        transform: rotate(180deg);
         animation-delay: 5s;
     }
 }
@@ -115,7 +120,7 @@ body {
         border-radius: @formBorderRadius;
 
         filter: blur(10px);
-        background: url(@backgroundImage) no-repeat;
+        background: url(@backgroundImageUrl) no-repeat;
         background-position: center;
 
         opacity: 1;
@@ -186,6 +191,10 @@ body {
             outline: 3px solid @themeColor;
         }
 
+        &--valid {
+            box-shadow: 0 0 10px 0 @validInputColor;
+        }
+
         &--invalid {
             box-shadow: 0 0 10px 0 @invalidInputColor;
         }
@@ -204,7 +213,7 @@ body {
 
         opacity: 0.6;
 
-        transition: opacity 1.5s;
+        transition: opacity 1s;
 
         &:hover {
             cursor: pointer;
@@ -215,7 +224,7 @@ body {
         }
     }
 
-    &__input:valid + &__input:valid + &__input:valid + &__input:valid + &__submit {
+    &__input--valid + &__input--valid + &__input--valid + &__input--valid + &__submit {
         opacity: 1;
         box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
         &:active:hover {

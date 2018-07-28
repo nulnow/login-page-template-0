@@ -9,6 +9,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Roboto Slab', serif;
 }
 body {
   display: flex;
@@ -38,6 +39,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
+  filter: blur(2px);
   background: url("smoke.png");
   -webkit-background-size: cover;
   background-size: cover;
@@ -51,7 +53,7 @@ body {
   opacity: 0;
 }
 .smoke--2 {
-  transform: rotate(360deg);
+  transform: rotate(180deg);
   animation-delay: 5s;
 }
 .form-blured-back {
@@ -136,6 +138,9 @@ body {
 .form__input:focus {
   outline: 3px solid #00c853;
 }
+.form__input--valid {
+  box-shadow: 0 0 10px 0 rgba(0, 255, 0, 0.5);
+}
 .form__input--invalid {
   box-shadow: 0 0 10px 0 rgba(255, 0, 0, 0.5);
 }
@@ -152,7 +157,7 @@ body {
   background-color: #00c853;
   background: linear-gradient(#00fb68, #00953e);
   opacity: 0.6;
-  transition: opacity 1.5s;
+  transition: opacity 1s;
 }
 .form__submit:hover {
   cursor: pointer;
@@ -160,11 +165,11 @@ body {
 .form__submit:focus {
   outline: none;
 }
-.form__input:valid + .form__input:valid + .form__input:valid + .form__input:valid + .form__submit {
+.form__input--valid + .form__input--valid + .form__input--valid + .form__input--valid + .form__submit {
   opacity: 1;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
 }
-.form__input:valid + .form__input:valid + .form__input:valid + .form__input:valid + .form__submit:active:hover {
+.form__input--valid + .form__input--valid + .form__input--valid + .form__input--valid + .form__submit:active:hover {
   background: linear-gradient(#00953e, #006229);
 }
 @keyframes smokeMoving {
